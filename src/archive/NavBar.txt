@@ -1,0 +1,90 @@
+import { React, useContext } from "react";
+import { Fade as Hamburger } from "hamburger-react";
+import {
+  DropdownContext,
+  Dropdown,
+  DropdownButton,
+  DropdownContent,
+  DropdownList,
+  DropdownItem,
+} from "./Dropdown";
+import mockData from "../data/mockData.json";
+
+export default function NavBar() {
+  const { setOpen } = useContext(DropdownContext);
+  const productItems = mockData.productDropdown;
+  const resourceItems = mockData.resourceDropdown;
+
+  function onButtonClick({ prop }) {
+    console.log("Button Click", prop);
+  }
+
+  const handleClick = () => {
+    setOpen(false); // close the menu
+  };
+
+  return (
+    <>
+      <div className="w-1440px h-80px flex flex-row">
+        {/* Logo */}
+        <section className="flex flex-row">
+          <img src="/vite.svg" alt="logo svg" loading="lazy" />
+          <p>Untitled UI</p>
+        </section>
+        {/* destop section */}
+        <div className="flex flex-row md:hidden">
+          <a href="/">Home</a>
+          <div>
+            <Dropdown>
+              <DropdownButton>Products</DropdownButton>
+              <DropdownContent>
+                <DropdownList>
+                  {productItems.map((item) => (
+                    <DropdownItem
+                      key={item.id}
+                      to={`product/${item.slug}`}
+                      handleClick={handleClick}
+                    >
+                      {item.title}
+                    </DropdownItem>
+                  ))}
+                </DropdownList>
+              </DropdownContent>
+            </Dropdown>
+          </div>
+          <div>
+            <Dropdown>
+              <DropdownButton>Resources</DropdownButton>
+              <DropdownContent>
+                <DropdownList>
+                  {resourceItems.map((item) => (
+                    <DropdownItem
+                      key={item.id}
+                      to={`product/${item.slug}`}
+                      handleClick={handleClick}
+                    >
+                      {item.title}
+                    </DropdownItem>
+                  ))}
+                </DropdownList>
+              </DropdownContent>
+            </Dropdown>
+          </div>
+          <div>
+            <a href="#" onClick={() => {}}>
+              Pricing
+            </a>
+          </div>
+          <div>
+            <button onClick={onButtonClick("Log in")}>Log in</button>
+            <button>Sign Up</button>
+          </div>
+        </div>
+        {/* Mobile Section */}
+        <div className="lg:hidden">
+          <Hamburger />
+        </div>
+      </div>
+    </>
+  );
+}

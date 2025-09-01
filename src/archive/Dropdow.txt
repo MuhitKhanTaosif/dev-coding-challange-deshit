@@ -1,0 +1,70 @@
+import React, { useState, useContext } from "react";
+import { Link } from "react-router";
+
+export const DropdownContext = React.createContext({
+  open: false,
+  setOpen: () => {},
+});
+
+export function Dropdown({ children }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <DropdownContext.Provider value={{ open, setOpen }}>
+      <div className="relative w-full">{children}</div>
+    </DropdownContext.Provider>
+  );
+}
+
+export function DropdownButton({ children }) {
+  const { open, setOpen } = useContext(DropdownContext);
+  return (
+    <button
+      onClick={() => setOpen(!open)}
+      className="ml-7 px-4 font-medium text-gray-800 hover:bg-gray-100 flex justify-center items-center"
+    >
+      {children}
+      <svg
+        className={`w-4 h-4 transition-transform duration-200 ${
+          open ? "rotate-180" : "rotate-0"
+        }`}
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={2}
+        stroke="currentColor"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 9l6 6 6-6" />
+      </svg>
+    </button>
+  );
+}
+
+export function DropdownContent({ children }) {
+  const { open } = useContext(DropdownContext);
+  return (
+    <div
+      className={`transition-all duration-300 overflow-hidden ${
+        open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+      }`}
+    >
+      {children}
+    </div>
+  );
+}
+
+export function DropdownList({ children }) {
+  return <ul className="flex flex-col space-y-1 px-6 py-2 z-50">{children}</ul>;
+}
+
+export function DropdownItem({ children, to, handleClick }) {
+  return (
+    <li>
+      <Link
+        to={to}
+        onClick={handleClick}
+        className="block text-sm text-gray-600 hover:text-black hover:underline transition-colors duration-150"
+      >
+        {children}
+      </Link>
+    </li>
+  );
+}
