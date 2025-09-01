@@ -33,5 +33,43 @@
       "title": "Resource 3",
       "slug": "resource-3"
     }
+  ],
+  "companyList": [
+    {
+      "id": 1,
+      "title": "Boltshift",
+      "logo": "/bolt-circle.svg",
+      "fill": "Blue"
+    },
+    {
+      "id": 2,
+      "title": "Lightbox",
+      "logo": "/container.svg",
+      "fill": "none"
+    },
+    {
+      "id": 3,
+      "title": "FeatherDev",
+      "logo": "/green-lantern.svg",
+      "fill": "none"
+    },
+    {
+      "id": 4,
+      "title": "Spherule",
+      "logo": "/global.svg",
+      "fill": "purple"
+    },
+    {
+      "id": 5,
+      "title": "GlobalBank",
+      "logo": "/bank.svg",
+      "fill": "blue"
+    },
+    {
+      "id": 6,
+      "title": "Nietzche",
+      "logo": "/spiral.svg",
+      "fill": "orange"
+    }
   ]
 }
